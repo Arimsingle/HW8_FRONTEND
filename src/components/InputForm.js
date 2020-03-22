@@ -5,21 +5,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bearActions } from '../redux/store'
 import { formActions } from '../redux/store'
 import { bindActionCreators } from 'redux';
+import { Button } from 'react-bootstrap';
 const InputForm = props => {
-    
+
     const actionsBear = bindActionCreators(bearActions, useDispatch());
     const actionsForm = bindActionCreators(formActions, useDispatch());
     const form = useSelector(state => state.form)
     const bears = useSelector(state => state.bear)
     const addBear = async () => {
-        await axios.post(`http://localhost:8080/api/bears`, form)
+        await axios.post(`http://localhost/api/bears`, form)
         // dispatch({
         //     type: 'ADD_BEAR', bears: {
         //         id: bears.length > 0 ? bears[bears.length - 1].id + 1 : 0,
         //         ...form
         //     }
         // })
-        actionsBear.addBear(bears,form)
+        actionsBear.addBear(bears, form)
     }
     //const { data, onChange } = props;
     return (
@@ -48,7 +49,7 @@ const InputForm = props => {
                     <tr>
                         <td></td>
                         <td>
-                            <button className='btn' onClick={addBear}>CREATE</button>
+                            <Button variant="outline-primary" onClick={addBear}>CREATE</Button>
                         </td>
                     </tr>
                 </tbody>
